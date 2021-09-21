@@ -585,7 +585,9 @@ export class LionCombobox extends OverlayMixin(LionListbox) {
   _onFilterMatch(option, matchingString) {
     const { innerHTML } = option;
     option.__originalInnerHTML = innerHTML;
-    const newInnerHTML = innerHTML.replace(new RegExp(`(${matchingString})`, 'i'), `<b>$1</b>`);
+    // Make sure we don't inject code...
+    const sanitizedInput = matchingString.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const newInnerHTML = innerHTML.replace(new RegExp(`(${sanitizedInput})`, 'i'), `<b>$1</b>`);
     // For Safari, we need to add a label to the element
     option.innerHTML = `<span aria-label="${option.textContent}">${newInnerHTML}</span>`;
     // Alternatively, an extension can add an animation here
