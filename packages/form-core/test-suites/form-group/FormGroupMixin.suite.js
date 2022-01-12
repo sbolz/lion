@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ifDefined, LitElement } from '@lion/core';
 import { IsNumber, LionField, Validator } from '@lion/form-core';
 import '@lion/form-core/define';
